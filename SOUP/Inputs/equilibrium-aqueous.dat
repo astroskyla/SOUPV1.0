@@ -1,0 +1,56 @@
+# Aqueous Solution Data File
+# This file contains information about species, their concentrations and their Henry's Law Constants as well as the properties of the aqueous solution
+# Please follow the format below to update or add new data.
+
+# Species and their corresponding partial pressures (in atm)
+# Format: species, concentration (M)
+species, concentration
+Ca+2, 0.1
+CaCO3, 0.0
+NH3, 0.0
+SO3-2, 0.0
+HS-1, 0.0
+HCO3-1, 0.0
+HSO3-1, 0.0
+HSO4-1, 0.0
+HPO4-2, 0.1
+H+1, 1.0e-7
+SO2, 0.0
+H2CO3, 0.0
+CO2, 6.2e-8
+H2CO3, 0.0 
+H2O, 1.0 
+CO3-2, 0.0 
+H2PO4-1, 0.0
+PO4-3, 0.0
+H2P2O7-2, 0.0
+H3P2O7-1, 0.0
+H4P2O7, 0.0
+HP2O7-3, 0.0
+S-2, 0.0
+SO4-2, 0.0
+H2SO3, 0.0
+H3PO4, 0.0
+H2S, 0.0
+OH-1, 1.0e-7
+CaOH+1, 0.0
+CaHCO3+1, 0.0
+CaPO4-1, 0.0
+CaH2PO4+1, 0.0
+CaO2H2, 0.0
+P2O7-4, 0.0
+CaHPO4, 0.0
+
+# Total Volume (in L)
+Total Volume
+1
+
+# Temperature (in Kelvin)
+# This is currently set as an average but a temperature spectrum could be used in the future
+Total Temperature
+298.15
+
+# pH
+# This is currently set as an average pH but a spectrum could be used in the future 
+pH
+7.0

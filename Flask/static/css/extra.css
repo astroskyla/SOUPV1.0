@@ -1,0 +1,101 @@
+/* === Site Name Underline === */
+.md-header .site-name {
+    text-transform: uppercase;
+}
+
+.md-header .site-name span {
+    display: inline-block;
+    position: relative;
+}
+
+.md-header .site-name span::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: bottom left;
+    transition: transform 0.3s ease;
+}
+
+.md-header .site-name span.uppercase {
+    display: inline-block;
+    transform: scaleX(1);
+}
+
+/* === Tip Admonition Override === */
+
+/* Hide all default icons and SVGs inside the tip summary */
+.md-typeset details.tip summary .md-icon,
+.md-typeset details.tip summary svg,
+.md-typeset details.tip summary::marker,
+.md-typeset details.tip summary::before,
+.md-typeset details.tip summary::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Add soup bowl emoji icon before the summary text */
+.md-typeset details.tip > summary::before {
+    content: "🥣";
+    color: #6c9a8b;
+    margin-right: 0.5em;
+    font-size: 1.4em;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/* Style the whole tip box */
+.md-typeset details.tip {
+    border-left: 4px solid #6c9a8b !important;
+    background-color: #eef4f2 !important;  /* subtle background */
+    padding-left: 1em;  /* padding so content doesn’t touch border */
+    margin: 0;          /* reset margin if any */
+}
+
+/* Optional: make sure summary and content have transparent background */
+.md-typeset details.tip summary,
+.md-typeset details.tip > * {
+    background-color: transparent !important;
+}
+
+.md-typeset details.tip {
+    margin-bottom: 1.5em;  /* adjust this value as you like */
+}
+
+:root {
+    --md-primary-fg-color:        #f37b3a;
+    --md-accent-fg-color:         #6c9a8b;
+    --md-admonition-icon--validation: url("../assets/notes.svg");
+  }
+
+/* Scale up the logo image without increasing header height */
+.md-header__button.md-logo img {
+  transform: scale(1.3);  /* increase as needed */
+  transform-origin: left center;
+}
+
+
+/* Light mode */
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: #ffffff;
+}
+
+.md-typeset .admonition.validation,
+.md-typeset details.validation {
+  border-color: #dde7d8;
+}
+.md-typeset .validation > .admonition-title,
+.md-typeset .validation > summary {
+  background-color: #dde7d8;
+}
+.md-typeset .validation > .admonition-title::before,
+.md-typeset .validation > summary::before {
+  background-color: #dde7d8;
+  -webkit-mask-image: var(--md-admonition-icon--validation);
+          mask-image: var(--md-admonition-icon--validation);
+}

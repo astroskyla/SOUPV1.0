@@ -1,0 +1,20 @@
+# Species and their corresponding concentrations (in M)
+# Format: species, concentration (M)
+species, concentration
+ZCE, 0.1
+ZCD, 0.0
+ZCK, 0.0
+ZOD, 0.0
+ZOK, 0.0
+
+# Total Volume (in L)
+Total Volume
+1
+
+# Temperature (in Kelvin)
+Total Temperature
+298.15
+
+# pH
+pH
+3.0

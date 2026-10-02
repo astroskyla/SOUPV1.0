@@ -1,0 +1,57 @@
+site_name: SOUP
+site_url: https://astroskyla.github.io/soup-prototype/
+
+nav:
+  - Home: index.md
+  - Database:
+      - Overview: Database.md
+      - Species: species.md
+      - References for Databases: database/References.md
+  - Model: 
+      - The Model: Model.md
+      - Running the Model: RunMe.md
+      - Debugging: Debugging.md
+      - Future Innovations: Future.md
+      - Example Simulation: Example.md
+      - Case Studies: CaseStudies.md
+  - Publications: Publications.md
+
+theme: 
+  name: material
+  favicon: img/fav2.png
+  logo: img/fav3.png
+  palette:
+    primary: custom
+    accent: custom
+    toggle:
+      - 'theme'
+
+extra_css:
+  - css/extra.css
+  - stylesheets/extra.css
+
+
+markdown_extensions:
+  - admonition
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.inlinehilite
+  - pymdownx.details         
+  - pymdownx.superfences     
+  - pymdownx.highlight        
+  - pymdownx.snippets    
+  - pymdownx.arithmatex
+  - pymdownx.tasklist
+  - pymdownx.tabbed
+  - pymdownx.betterem
+  - codehilite
+  - toc:
+      permalink: true
+
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+

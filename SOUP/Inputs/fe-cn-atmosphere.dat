@@ -1,0 +1,11 @@
+# Atmosphere
+species, partial_pressure, constant (M/atm)
+
+Total pressure
+1.0
+
+Total Temperature
+298
+
+Solar Spectrum File
+spectrum.dat

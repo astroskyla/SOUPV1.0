@@ -1,0 +1,18 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	modified:   README.md
+#	modified:   SOUP/Inputs/Databases/master.db
+#	modified:   SOUP/diagnose.py
+#	modified:   docs/CaseStudies.md
+#	modified:   docs/Database.md
+#	modified:   docs/Debugging.md
+#	modified:   docs/Example.md
+#	modified:   docs/Model.md
+#	modified:   docs/RunMe.md
+#

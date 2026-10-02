@@ -1,0 +1,49 @@
+:root {
+    --md-primary-fg-color:        #f37b3a;
+    --md-accent-fg-color:         #6c9a8b;
+    --md-admonition-icon--validation: url("../assets/notes.svg");
+  }
+
+/* Scale up the logo image without increasing header height */
+.md-header__button.md-logo img {
+  transform: scale(1.3);  /* increase as needed */
+  transform-origin: left center;
+}
+
+
+/* Light mode */
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: #ffffff;
+}
+
+.md-typeset .admonition.validation,
+.md-typeset details.validation {
+  border-color: #dde7d8;
+}
+.md-typeset .validation > .admonition-title,
+.md-typeset .validation > summary {
+  background-color: #dde7d8;
+}
+.md-typeset .validation > .admonition-title::before,
+.md-typeset .validation > summary::before {
+  background-color: #dde7d8;
+  -webkit-mask-image: var(--md-admonition-icon--validation);
+          mask-image: var(--md-admonition-icon--validation);
+}
+
+.md-typeset .validation > summary::before {
+  content: "";
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.5em;
+  vertical-align: middle;
+
+  background-color: #6c9a8b;
+  -webkit-mask-image: var(--md-admonition-icon--validation);
+          mask-image: var(--md-admonition-icon--validation);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+          mask-size: contain;
+}

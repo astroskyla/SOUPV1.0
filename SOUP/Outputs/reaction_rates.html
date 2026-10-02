@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Reaction Rates Analysis</title>
+    <style>
+        :root {
+            --primary-light: #DDE7D8;
+            --primary-medium: #6C9A8B;
+            --primary-dark: #173F3F;
+            --accent-brown: #5C4033;
+            --accent-orange: #F37B3A;
+            --production-green: #27ae60;
+            --loss-red: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--primary-dark);
+            background: linear-gradient(135deg, var(--primary-light) 0%, #f0f5f1 100%);
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(92, 64, 51, 0.1);
+            padding: 30px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-medium);
+        }
+        
+        h1 {
+            color: var(--primary-dark);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: var(--accent-brown);
+            font-size: 1.1em;
+        }
+        
+        .time-section {
+            margin: 40px 0;
+            border: 1px solid var(--primary-light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(23, 63, 63, 0.1);
+        }
+        
+        .time-header {
+            background: linear-gradient(135deg, var(--primary-medium), var(--primary-dark));
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        
+        .species-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background: #f8faf9;
+        }
+        
+        .species-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(23, 63, 63, 0.08);
+            border-left: 4px solid var(--primary-medium);
+        }
+        
+        .species-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        
+        .rate-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .concentration {
+            color: var(--accent-brown);
+            font-size: 0.9em;
+        }
+        
+        .net-rate {
+            font-weight: 600;
+            font-size: 1.1em;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+        
+        .rate-positive {
+            background: #d5f4e6;
+            color: var(--production-green);
+        }
+        
+        .rate-negative {
+            background: #fadbd8;
+            color: var(--loss-red);
+        }
+        
+        .rate-zero {
+            background: var(--primary-light);
+            color: var(--accent-brown);
+        }
+        
+        .reactions-section {
+            margin-top: 15px;
+        }
+        
+        .reaction-item {
+            margin: 8px 0;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            border-left: 4px solid;
+        }
+        
+        .production {
+            background: linear-gradient(90deg, #e8f8f2, #f0fbf5);
+            border-left-color: var(--production-green);
+        }
+        
+        .loss {
+            background: linear-gradient(90deg, #fdeaea, #fef2f2);
+            border-left-color: var(--loss-red);
+        }
+        
+        .reaction-rate {
+            font-weight: 600;
+            float: right;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+        
+        .production .reaction-rate {
+            background: var(--production-green);
+            color: white;
+        }
+        
+        .loss .reaction-rate {
+            background: var(--loss-red);
+            color: white;
+        }
+        
+        .reaction-equation {
+            color: var(--accent-brown);
+            font-size: 0.85em;
+            margin-top: 8px;
+            font-family: 'Courier New', monospace;
+            background: rgba(255,255,255,0.5);
+            padding: 5px 8px;
+            border-radius: 4px;
+        }
+        
+        .chemical-equation {
+            color: var(--primary-dark);
+            font-weight: 500;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-light), #eef4ed);
+            border-radius: 10px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .stat-label {
+            color: var(--accent-brown);
+            font-size: 0.9em;
+        }
+        
+        .toggle-button {
+            background: linear-gradient(135deg, var(--primary-medium), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-button:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent-brown));
+            transform: translateY(-1px);
+        }
+        
+        .reactions-details {
+            display: none;
+            margin-top: 15px;
+        }
+        
+        .reactions-details.show {
+            display: block;
+        }
+        
+        .arrow {
+            color: var(--accent-orange);
+            font-weight: bold;
+            padding: 0 5px;
+        }
+        
+        .equilibrium-arrow {
+            color: var(--primary-medium);
+            font-weight: bold;
+            padding: 0 5px;
+        }
+    </style>
+    <script>
+        function toggleReactions(speciesId) {
+            const details = document.getElementById(speciesId + '-details');
+            const button = document.getElementById(speciesId + '-button');
+            
+            if (details.classList.contains('show')) {
+                details.classList.remove('show');
+                button.textContent = 'Show Reactions';
+            } else {
+                details.classList.add('show');
+                button.textContent = 'Hide Reactions';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Reaction Rates</h1>
+            <div class="subtitle">Generated on September 16, 2026 at 03:57 PM</div>
+        </div>

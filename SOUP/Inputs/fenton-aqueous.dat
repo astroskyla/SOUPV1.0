@@ -1,0 +1,37 @@
+# Species and their corresponding partial pressures (in atm)
+# Format: species, concentration (M)
+species, concentration
+Fe3, 0.0002
+FeIII, 0.0
+FeIIIOH, 0.0
+I2, 0.0
+H, 1.0e-3
+OH, 1.0e-11
+FeIIIOHOH, 0.0
+FeFeIIIOHOH, 0.0
+HHOO, 1.0
+H2O, 1.0
+I1, 0.0
+HOOdot, 0.0
+FeII, 0.0
+OHdot, 0.0
+OOdot, 0.0
+OO, 0.0
+Pi, 0.0
+Pix, 0.0
+products 0.0
+atrazine, 0.0000007
+
+# Total Volume (in L)
+Total Volume
+1
+
+# Temperature (in Kelvin)
+# This is currently set as an average but a temperature spectrum could be used in the future
+Total Temperature
+298.15
+
+# pH
+# This is currently set as an average pH but a spectrum could be used in the future 
+pH
+3.0

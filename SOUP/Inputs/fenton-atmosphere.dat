@@ -1,0 +1,23 @@
+# Atmosphere Data File
+# This file contains information about species, their partial pressures, total pressure, total temperature, and the solar spectrum file in use.
+# Please follow the format below to update or add new data.
+
+# Species and their corresponding partial pressures (in atm) along with Henry's Law Constants
+# Format: species, partial_pressure (atm), Henry's Law Constant (M/atm)
+species, partial_pressure, constant (M/atm)
+
+
+# Total pressure (in atm)
+# This is currently set as however a pressure spectrum could be used in the future
+Total pressure
+1.0
+
+# Temperature (in Kelvin)
+# This is currently set as an average but a temperature spectrum could be used in the future
+Total Temperature
+298
+
+# Solar spectrum file (relative or absolute path)
+# There is currently no solar spectrum but it can be added in the future to work with specific photochemistry
+Solar Spectrum File
+spectrum.dat
