@@ -1,5 +1,5 @@
 site_name: SOUP
-site_url: https://astroskyla.github.io/soup-prototype/
+site_url: https://astroskyla.github.io/SOUPV1.0/
 
 nav:
   - Home: index.md
@@ -10,7 +10,6 @@ nav:
   - Model: 
       - The Model: Model.md
       - Running the Model: RunMe.md
-      - Debugging: Debugging.md
       - Future Innovations: Future.md
       - Example Simulation: Example.md
       - Case Studies: CaseStudies.md
