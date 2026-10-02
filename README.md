@@ -1,7 +1,7 @@
 # SOUPV1.0.0
 
 ## Description
-This repository contains the SOUPV1.0.0 model and database. 
+This repository contains the SOUPV1.0 model and database. 
 
 Note that for some scripts, code was cleaned up and coments formatted using Github Copilot. These have been thoroughly checked by SBWhite to ensure information is correct. 
 
@@ -57,4 +57,4 @@ Note that for some scripts, code was cleaned up and coments formatted using Gith
     nohup mkdocs serve > /dev/null 2>&1 &
     ```
 
-5. **Navigate to the website** to find out how to run the model and manipulate the database. The website can be accessed by clicking [here](https://astroskyla.github.io/SOUPV1.0/)**
+5. **Navigate to the website** to find out how to run the model and manipulate the database. The website can be accessed by clicking [here](https://astroskyla.github.io/SOUPV1.0/)
