@@ -1,0 +1,1199 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://astroskyla.github.io/SOUPV1.0/Debugging/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../img/fav2.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Debugging the SOUP Model - SOUP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#debugging-the-soup-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="SOUP" class="md-header__button md-logo" aria-label="SOUP" data-md-component="logo">
+      
+  <img src="../img/fav3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SOUP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Debugging the SOUP Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SOUP" class="md-nav__button md-logo" aria-label="SOUP" data-md-component="logo">
+      
+  <img src="../img/fav3.png" alt="logo">
+
+    </a>
+    SOUP
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Database
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../species/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Species
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database/References/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References for Databases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Model
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RunMe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running the Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Future/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Future Innovations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Example Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Case Studies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Publications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-diagnostic-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Diagnostic Tool
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick Diagnostic Tool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-diagnostic-shows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Diagnostic Shows
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-issues-and-solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Issues and Solutions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Issues and Solutions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solver-crashes-or-all-solver-attempts-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solver Crashes or "All Solver Attempts Failed"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negative-concentrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Negative Concentrations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#very-slow-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Very Slow Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computer-overheatingcrashes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Computer Overheating/Crashes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unrealistic-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unrealistic Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-system-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding System Messages
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding System Messages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#good-signs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Good Signs:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warning-signs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Warning Signs:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-signs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem Signs:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-testing-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Testing Strategy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Testing Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step Approach:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Debugging
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Debugging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examining-rate-constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examining Rate Constants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-diagnostic-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Diagnostic Checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Help
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Help">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#information-to-collect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Information to Collect:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-solutions-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Solutions Summary:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="debugging-the-soup-model">Debugging the SOUP Model<a class="headerlink" href="#debugging-the-soup-model" title="Permanent link">&para;</a></h1>
+<p>This guide helps you diagnose and fix common issues that might pop up when running the SOUP Model.</p>
+<hr />
+<h2 id="quick-diagnostic-tool">Quick Diagnostic Tool<a class="headerlink" href="#quick-diagnostic-tool" title="Permanent link">&para;</a></h2>
+<p><strong>Before running long simulations, always run the diagnostic tool first:</strong></p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>diagnose.py
+</code></pre></div>
+<p>This will check your database, initial conditions, and system setup for potential problems.</p>
+<h3 id="what-the-diagnostic-shows">What the Diagnostic Shows<a class="headerlink" href="#what-the-diagnostic-shows" title="Permanent link">&para;</a></h3>
+<p>The diagnostic tool provides a sort of health check:</p>
+<ul>
+<li><strong>Database File Check</strong>: Confirms the database file exists and loads correctly</li>
+<li><strong>Rate Constant Analysis</strong>: Identifies extreme values that could cause stiffness</li>
+<li><strong>Initial Conditions Check</strong>: Finds negative, zero, or unrealistic concentrations  </li>
+<li><strong>Henry's Law Validation</strong>: Verifies atmospheric species equilibrium setup</li>
+<li><strong>Stiffness Assessment</strong>: Calculates the mathematical difficulty of your system</li>
+<li><strong>Species Balance Analysis</strong>: Checks for elemental mass-balance issues across your reaction network</li>
+<li><strong>ODE Evaluation Test</strong>: Tests if your equations work at the starting point</li>
+</ul>
+<hr />
+<h2 id="common-issues-and-solutions">Common Issues and Solutions<a class="headerlink" href="#common-issues-and-solutions" title="Permanent link">&para;</a></h2>
+<h3 id="solver-crashes-or-all-solver-attempts-failed"><strong>Solver Crashes or "All Solver Attempts Failed"</strong><a class="headerlink" href="#solver-crashes-or-all-solver-attempts-failed" title="Permanent link">&para;</a></h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Integration stops early</li>
+<li>"All bulletproof solver attempts failed" message</li>
+<li>Very slow progress then crashes </li>
+</ul>
+<p><strong>Diagnosis Steps:</strong></p>
+<ol>
+<li>Check stiffness ratio in diagnostic output</li>
+<li>Look for extreme rate constants (&gt;1e8 or &lt;1e-10)</li>
+<li>Verify initial conditions are reasonable</li>
+</ol>
+<p><strong>Solutions:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Run diagnostic first</span>
+python<span class="w"> </span>diagnose.py
+
+<span class="c1"># 2. If stiffness ratio &gt; 1e10, try shorter time periods</span>
+<span class="c1"># Instead of 1 year, try 1 week first</span>
+
+<span class="c1"># 3. Check for problematic reactions in your database</span>
+<span class="c1"># Look for rate constants spanning too many orders of magnitude</span>
+</code></pre></div></p>
+<p><strong>Prevention:</strong></p>
+<ul>
+<li>Always test short periods before long simulations</li>
+<li>Use the bulletproof rate constant method (default)</li>
+<li>Ensure your database has physically reasonable rate constants</li>
+</ul>
+<hr />
+<h3 id="negative-concentrations"><strong>Negative Concentrations</strong><a class="headerlink" href="#negative-concentrations" title="Permanent link">&para;</a></h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Warning messages about negative species</li>
+<li>Unphysical results</li>
+<li>Species "going negative" during simulation</li>
+</ul>
+<p><strong>What This Means:</strong>
+Negative concentrations are physically impossible therefore the solver is taking steps that overshoot and create unrealistic values.</p>
+<p><strong>Automatic Fixes:</strong>
+Negative, NaN, or Inf starting concentrations are floored to zero before the run begins, and any NaN/Inf values left in the final results are replaced with 1e-15 M. Mid-run negative excursions aren't actively corrected — they're reported as numerical uncertainty rather than clamped.</p>
+<p><strong>Manual Check:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># In your results, check for any remaining negatives:</span>
+<span class="n">negative_mask</span> <span class="o">=</span> <span class="n">results</span> <span class="o">&lt;</span> <span class="mi">0</span>
+<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">negative_mask</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Negative concentrations found!"</span><span class="p">)</span>
+    <span class="c1"># The system should have prevented this</span>
+</code></pre></div></p>
+<hr />
+<h3 id="very-slow-integration"><strong>Very Slow Integration</strong><a class="headerlink" href="#very-slow-integration" title="Permanent link">&para;</a></h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Integration takes hours for short time periods</li>
+<li>Computer becomes unresponsive</li>
+<li>Many tiny time steps reported</li>
+</ul>
+<p><strong>Causes:</strong></p>
+<ol>
+<li><strong>Extreme Stiffness</strong>: Rate constants span too many orders of magnitude</li>
+<li><strong>Tight Tolerances</strong>: Solver trying to be too accurate</li>
+<li><strong>Poor Initial Conditions</strong>: Starting from unrealistic concentrations</li>
+</ol>
+<p><strong>Solutions:</strong></p>
+<p><strong>For Short-Term Issues:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Check if your system is extremely stiff</span>
+python<span class="w"> </span>diagnose.py
+
+<span class="c1"># Look for "Stiffness ratio: X.XeYY"</span>
+<span class="c1"># If ratio &gt; 1e12, expect slow integration</span>
+</code></pre></div></p>
+<p><strong>For Long-Term Integration:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># The system automatically switches to optimized long-term solver</span>
+<span class="c1"># for simulations &gt; 1 week</span>
+
+<span class="c1"># Test progression:</span>
+<span class="c1"># 1 hour → 1 day → 1 week → 1 month → 1 year</span>
+</code></pre></div></p>
+<hr />
+<h3 id="computer-overheatingcrashes"><strong>Computer Overheating/Crashes</strong><a class="headerlink" href="#computer-overheatingcrashes" title="Permanent link">&para;</a></h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Computer fan running loudly</li>
+<li>System becomes very slow</li>
+<li>Unexpected shutdowns during integration</li>
+</ul>
+<p><strong>Immediate Actions:</strong></p>
+<ol>
+<li><strong>Stop the simulation</strong> (Ctrl+C)</li>
+<li><strong>Cool down your computer</strong></li>
+<li><strong>Test with much shorter times first</strong></li>
+</ol>
+<p><strong>Prevention:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Always test performance first:</span>
+python<span class="w"> </span>main.py
+<span class="c1"># Enter end time: 3600  (1 hour test)</span>
+
+<span class="c1"># If 1 hour takes more than 1 minute, don't try longer periods</span>
+<span class="c1"># Your system may be too stiff for long integration</span>
+</code></pre></div></p>
+<hr />
+<h3 id="unrealistic-results"><strong>Unrealistic Results</strong><a class="headerlink" href="#unrealistic-results" title="Permanent link">&para;</a></h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Concentrations that don't make chemical sense</li>
+<li>Species not behaving as expected</li>
+<li>Equilibrium species changing when they shouldn't</li>
+</ul>
+<p><strong>Check Henry's Law Species:</strong>
+These should NEVER change from their atmospheric equilibrium.</p>
+<p><strong>Validation Steps:</strong>
+There's no specific console message to watch for here — instead, check whether the concentration values for your Henry's Law–governed species stay constant across the output timesteps in <code>species_concentrations.md</code>.</p>
+<hr />
+<h2 id="understanding-system-messages">Understanding System Messages<a class="headerlink" href="#understanding-system-messages" title="Permanent link">&para;</a></h2>
+<h3 id="good-signs"><strong>Good Signs:</strong><a class="headerlink" href="#good-signs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Success with Radau!  (or BDF, etc. - the solver method name varies)
+ODE evaluation successful
+</code></pre></div>
+<h3 id="warning-signs"><strong>Warning Signs:</strong><a class="headerlink" href="#warning-signs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>WARNING: 3 extremely high rates (&gt;1e8)
+Negative concentrations: 5
+MODERATELY STIFF - should be manageable
+EXTREMELY STIFF - expect solver difficulties
+</code></pre></div>
+<h3 id="problem-signs"><strong>Problem Signs:</strong><a class="headerlink" href="#problem-signs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>All universal robust solver attempts failed
+Conservative retry also failed
+Error in &lt;species&gt;: &lt;exception message&gt;
+</code></pre></div>
+<hr />
+<h2 id="performance-testing-strategy">Performance Testing Strategy<a class="headerlink" href="#performance-testing-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="step-by-step-approach"><strong>Step-by-Step Approach:</strong><a class="headerlink" href="#step-by-step-approach" title="Permanent link">&para;</a></h3>
+<p><strong>Phase 1: Quick Tests (&lt; 5 minutes each)</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Test these durations in order:</span>
+python<span class="w"> </span>main.py
+<span class="c1"># 1. End time: 3600     (1 hour)</span>
+<span class="c1"># 2. End time: 86400    (1 day)  </span>
+<span class="c1"># 3. End time: 604800   (1 week)</span>
+</code></pre></div></p>
+<p><strong>Phase 2: Medium Tests (30-60 minutes each)</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Only if Phase 1 succeeds quickly:</span>
+python<span class="w"> </span>main.py<span class="w">  </span>
+<span class="c1"># 4. End time: 2592000   (1 month)</span>
+<span class="c1"># 5. End time: 7776000   (3 months)</span>
+</code></pre></div></p>
+<p><strong>Phase 3: Long-Term Test</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Only if Phase 2 completes in reasonable time:</span>
+python<span class="w"> </span>main.py
+<span class="c1"># 6. End time: 31536000  (1 year)</span>
+</code></pre></div></p>
+<p><strong>Performance Benchmarks:</strong></p>
+<ul>
+<li>1 hour should complete in &lt; 30 seconds</li>
+<li>1 day should complete in &lt; 2 minutes</li>
+<li>1 week should complete in &lt; 30 minutes</li>
+<li>If any step takes 10x longer than expected, stop and investigate</li>
+</ul>
+<hr />
+<h2 id="advanced-debugging">Advanced Debugging<a class="headerlink" href="#advanced-debugging" title="Permanent link">&para;</a></h2>
+<h3 id="examining-rate-constants"><strong>Examining Rate Constants</strong><a class="headerlink" href="#examining-rate-constants" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># After running diagnose.py, look for:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Rate constant range: X.XXe-XX to X.XXe+XX"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Stiffness ratio: X.XXe+XX"</span><span class="p">)</span>
+
+<span class="c1"># Stiffness interpretation:</span>
+<span class="c1"># &lt; 1e6:  Easy to integrate</span>
+<span class="c1"># 1e6-1e8: Manageable </span>
+<span class="c1"># 1e8-1e12: Difficult but possible</span>
+<span class="c1"># &gt; 1e12: Very challenging, expect slow integration</span>
+</code></pre></div>
+<h3 id="custom-diagnostic-checks"><strong>Custom Diagnostic Checks</strong><a class="headerlink" href="#custom-diagnostic-checks" title="Permanent link">&para;</a></h3>
+<p>Add these checks to your analysis:
+<div class="highlight"><pre><span></span><code><span class="c1"># Check concentration ranges</span>
+<span class="n">min_conc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">max_conc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Concentration range: </span><span class="si">{</span><span class="n">min_conc</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">max_conc</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Check for species that changed significantly</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">species</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">database_species</span><span class="p">):</span>
+    <span class="n">initial</span> <span class="o">=</span> <span class="n">initial_conditions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">change_ratio</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">final</span> <span class="o">-</span> <span class="n">initial</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">initial</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">change_ratio</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">species</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">initial</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">final</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> (changed </span><span class="si">{</span><span class="n">change_ratio</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x)"</span><span class="p">)</span>
+</code></pre></div></p>
+<hr />
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
+<h3 id="information-to-collect"><strong>Information to Collect:</strong><a class="headerlink" href="#information-to-collect" title="Permanent link">&para;</a></h3>
+<p>Please feel free to get in touch if issues persist. To do this please email skyla.white@unibe.ch. When reporting issues, include:</p>
+<ol>
+<li><strong>Diagnostic Output</strong>: Full output from <code>python diagnose.py</code></li>
+<li><strong>Error Messages</strong>: Exact text of error messages</li>
+<li><strong>System Specs</strong>: Computer type, RAM, operating system</li>
+<li><strong>Test Results</strong>: How long different time periods took</li>
+<li><strong>Database Info</strong>: Which database you're using</li>
+<li><strong>Input Files</strong>: Your atmosphere.dat and aqueous.dat contents</li>
+</ol>
+<h3 id="common-solutions-summary"><strong>Common Solutions Summary:</strong><a class="headerlink" href="#common-solutions-summary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Quick Fix</th>
+<th>Long-term Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Solver crashes</td>
+<td>Reduce time span</td>
+<td>Check database for extreme rates</td>
+</tr>
+<tr>
+<td>Negative concentrations</td>
+<td>Use bulletproof system (default)</td>
+<td>Verify initial conditions</td>
+</tr>
+<tr>
+<td>Very slow</td>
+<td>Test shorter periods</td>
+<td>Consider system stiffness</td>
+</tr>
+<tr>
+<td>Computer overheating</td>
+<td>Stop simulation, test 1 hour first</td>
+<td>Optimize rate constants</td>
+</tr>
+<tr>
+<td>Unrealistic results</td>
+<td>Check Henry's Law species</td>
+<td>Validate input data</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>Remember: Always run <code>python diagnose.py</code> first. It catches most issues before they cause problems!</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
